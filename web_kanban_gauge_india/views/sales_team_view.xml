@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+        <record id="crm_case_section_salesteams_view_form_inh" model="ir.ui.view">
+            <field name="name">crm.case.section.form.inh</field>
+            <field name="model">crm.case.section</field>
+            <field name="inherit_id" ref="sale.crm_case_section_salesteams_view_form"/>
+            <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='invoiced_forecast']" position="after">
+                    <field name="sales_team_decimals" invisible="1"/>
+                </xpath>
+            </data>
+            </field>
+        </record>
+    
+        <record id="crm_case_section_salesteams_view_kanban_inh" model="ir.ui.view">
+            <field name="name">crm.case.section.kanban.inh</field>
+            <field name="model">crm.case.section</field>
+            <field name="inherit_id" ref="sale.crm_case_section_salesteams_view_kanban"/>
+            <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='invoiced_forecast']" position="after">
+                    <field name="sales_team_decimals" invisible="1"/>
+                </xpath>
+                 <xpath expr="//div[@class='oe_center']" position="replace">
+                    <div class="oe_center" t-if="record.invoiced_target.raw_value">
+                        <field name="monthly_invoiced" widget="gauge" style="width:160px; height: 120px; cursor: pointer;"
+                            options="{'max_field': 'invoiced_target','humanFriendlyDecimal':'sales_team_decimals'}">Invoiced</field>
+                        <field name="invoiced_forecast" widget="gauge" style="width:160px; height: 120px; cursor: pointer;"
+                            options="{'max_field': 'invoiced_target', 'on_change': 'action_forecast','humanFriendlyDecimal':'sales_team_decimals'}">Forecast</field>
+                    </div>
+                    <div class="oe_center oe_salesteams_help" style="color:#bbbbbb;" t-if="!record.invoiced_target.raw_value">
+                        <br/>Define an invoicing target in the sales team settings to see the period's achievement and forecast at a glance.
+                    </div>
+                </xpath>
+            </data>
+            </field>
+        </record>
+
+    </data>
+</openerp>
