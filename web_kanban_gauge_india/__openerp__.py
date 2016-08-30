@@ -10,7 +10,7 @@ Decimals also Possible to Show.
     'sequence':0,
     'version': '1.0',
     'depends': ['web_kanban_gauge','sales_team'],
-    'images':['images/sales1.png'],
+    'images':['images/gauge1.png'],
     'data' : [
         'views/web_kanban_gauge_ind.xml',
         'views/res_company_view.xml',
